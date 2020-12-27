@@ -64,7 +64,7 @@ pipeline {
             sh "ls -ltr '${env.WORKSPACE}'"
             sh "ls -ltr '${env.WORKSPACE}/target'"
             deleteDir()
+            }
         }
     }
 }
-
