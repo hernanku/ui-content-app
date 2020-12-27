@@ -7,9 +7,9 @@ pipeline {
     stages {
         stage('Clone Repo') {
             steps {
+                credentialsId: 'jenkins-ssh',
                 git branch: 'feature/jenkins-cicd', 
                 url: "https://github.com/hernanku/ui-content-app.git"
-                credentialsId: 'jenkins-ssh',
                 // sh '''
 
                 // '''
