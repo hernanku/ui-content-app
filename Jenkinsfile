@@ -2,13 +2,15 @@ pipeline {
     agent {
         docker { 
             image 'node:14-alpine'
-            args '-u root:root'
         }
     }
     stages {
         stage('Clone Repo') {
             steps {
                 git branch: 'feature/jenkins-cicd', url: "git@github.com:hernanku/ui-content-app.git"
+                // sh '''
+
+                // '''
             }
         }
         // stage('Code Quality Check with SonarQube') {
@@ -63,9 +65,7 @@ pipeline {
     }
     post {
         always {
-            sh "ls -ltr '${env.WORKSPACE}'"
-            sh "ls -ltr '${env.WORKSPACE}/target'"
-            deleteDir()
+            cleanWs()
         }
     }
 }
