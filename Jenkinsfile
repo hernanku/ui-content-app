@@ -1,7 +1,7 @@
 pipeline {
     agent {
         docker { 
-            image 'node:14-alpine'
+            image 'hernanku/jenkin-node-agent:latest'
         }
     }
     stages {
