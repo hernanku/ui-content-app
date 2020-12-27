@@ -40,8 +40,8 @@ pipeline {
             steps {
                 sh '''
                 npm install
+                pwd
                 ls -altr
-                echo $pwd
                 ''' 
             }
         }
