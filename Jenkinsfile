@@ -42,6 +42,8 @@ pipeline {
                 npm install
                 pwd
                 ls -altr
+                zip -r ui-content-app.zip .
+                ls -altr
                 ''' 
             }
         }
