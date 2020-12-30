@@ -23,7 +23,7 @@ pipeline {
             steps {
                 git branch: 'feature/jenkins-cicd',
                     credentialsId: 'jenkins-ssh',
-                    url: "https://github.com/hernanku/$appName.git"
+                    url: "https://github.com/hernanku/${appName}.git"
                 // sh '''
 
                 // '''
