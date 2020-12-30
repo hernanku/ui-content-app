@@ -10,7 +10,7 @@ pipeline {
     environment {
         NEXUS_VERSION = "nexus3"
         NEXUS_PROTOCOL = "http"
-        NEXUS_URL = "localdev:8081"
+        // NEXUS_URL = "localdev:8081"
         NEXUS_REPOSITORY = "ui-content-app"
         NEXUS_CREDENTIAL_ID = "nexus-creds"
         BuildNumber = "${env.BUILD_NUMBER}"
@@ -69,7 +69,7 @@ pipeline {
                 nexusArtifactUploader(
                     nexusVersion: NEXUS_VERSION,
                     protocol: NEXUS_PROTOCOL,
-                    nexusUrl: NEXUS_URL,
+                    nexusUrl: 'http://10.177.23.30:8081',
                     repository: NEXUS_REPOSITORY,
                     credentialsId: NEXUS_CREDENTIAL_ID,
                     artifacts: [
