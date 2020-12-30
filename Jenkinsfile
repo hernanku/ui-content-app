@@ -60,10 +60,25 @@ pipeline {
                 echo "${env.NEXUS_URL}"
                 echo "${env.NEXUS_REPOSITORY}"
                 echo "${env.NEXUS_CREDENTIAL_ID}"
-                // rtUpload (
-                //     serverId: 'artifact-dev',
-                //     specPath: 'artifact-upload.json'
-                // )
+            script {
+                nexusArtifactUploader(
+                    nexusVersion: NEXUS_VERSION,
+                    protocol: NEXUS_PROTOCOL,
+                    nexusUrl: NEXUS_URL,
+                    repository: NEXUS_REPOSITORY,
+                    credentialsId: NEXUS_CREDENTIAL_ID,
+                    artifacts: [
+                        [
+                            artifactId: ui-content-app,
+                            classifier: '',
+                            file: ui-content-app.zip,
+                            type: "zip"
+                                    ]
+                                ]
+                            );
+                        } 
+                    }
+                }
             }
         }
 
