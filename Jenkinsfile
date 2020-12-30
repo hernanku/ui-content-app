@@ -49,7 +49,7 @@ pipeline {
                 npm install
                 pwd
                 ls -altr
-                zip -r ui-content-app.zip .
+                zip -r ui-content-app-1.0.zip .
                 ls -altr
                 ''' 
             }
@@ -71,7 +71,7 @@ pipeline {
                         [
                             artifactId: "ui-content-app",
                             classifier: '',
-                            file: "ui-content-app.zip",
+                            file: "ui-content-app-1.0.zip",
                             type: "zip"
                             ]
                         ]
