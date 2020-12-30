@@ -56,12 +56,10 @@ pipeline {
         }
 
         stage('Artifactory Upload') {
+            echo ${env.NEXUS_URL}
+            echo ${env.NEXUS_REPOSITORY}
+            echo ${env.NEXUS_CREDENTIAL_ID}
             steps {
-                sh '''
-                echo $env.NEXUS_URL
-                echo $env.NEXUS_REPOSITORY
-                echo $env.NEXUS_CREDENTIAL_ID
-                '''
                 // rtUpload (
                 //     serverId: 'artifact-dev',
                 //     specPath: 'artifact-upload.json'
