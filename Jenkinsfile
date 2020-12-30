@@ -4,6 +4,13 @@ pipeline {
             image 'hernanku/jenkin-node-agent:latest'
         }
     }
+    environment {
+        NEXUS_VERSION = "nexus3"
+        NEXUS_PROTOCOL = "http"
+        NEXUS_URL = "http://localdev:8081"
+        NEXUS_REPOSITORY = "ui-content-app"
+        NEXUS_CREDENTIAL_ID = "nexus-creds"
+    }
     stages {
         stage('Clone Repo') {
             steps {
@@ -48,14 +55,19 @@ pipeline {
             }
         }
 
-        // stage('Artifactory Upload') {
-        //     steps {
-        //         rtUpload (
-        //             serverId: 'artifact-dev',
-        //             specPath: 'artifact-upload.json'
-        //         )
-        //     }
-        // }
+        stage('Artifactory Upload') {
+            steps {
+                sh '''
+                echo ${env.NEXUS_URL}
+                echo ${env.NEXUS_REPOSITORY}
+                echo ${env.NEXUS_CREDENTIAL_ID}
+                '''
+                // rtUpload (
+                //     serverId: 'artifact-dev',
+                //     specPath: 'artifact-upload.json'
+                // )
+            }
+        }
 
         // stage('Publish build info') {
         //     steps {
