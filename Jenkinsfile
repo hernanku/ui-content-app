@@ -4,19 +4,26 @@ pipeline {
             image 'hernanku/jenkin-node-agent:latest'
         }
     }
+    parameters {
+        string (defaultValue: "1.0", description: "Please enter release version number", name: "RELEASE")
+    }
     environment {
         NEXUS_VERSION = "nexus3"
         NEXUS_PROTOCOL = "http"
-        NEXUS_URL = "http://localdev:8081"
+        NEXUS_URL = "localdev:8081"
         NEXUS_REPOSITORY = "ui-content-app"
         NEXUS_CREDENTIAL_ID = "nexus-creds"
+        BuildNumber = "${env.BUILD_NUMBER}"
+        Release = "${params.RELEASE}"
+        BuildVersion = "${params.RELEASE}.${env.BUILD_NUMBER}"
+        appName = "ui-content-app"
     }
     stages {
         stage('Clone Repo') {
             steps {
                 git branch: 'feature/jenkins-cicd',
                     credentialsId: 'jenkins-ssh',
-                    url: "https://github.com/hernanku/ui-content-app.git"
+                    url: "https://github.com/hernanku/$appName.git"
                 // sh '''
 
                 // '''
@@ -47,9 +54,7 @@ pipeline {
             steps {
                 sh '''
                 npm install
-                pwd
-                ls -altr
-                zip -r ui-content-app-1.0.zip .
+                zip -r $appName.$BuildVersion.zip .
                 ls -altr
                 ''' 
             }
@@ -69,9 +74,9 @@ pipeline {
                     credentialsId: NEXUS_CREDENTIAL_ID,
                     artifacts: [
                         [
-                            artifactId: "ui-content-app",
+                            artifactId: "${appName}",
                             classifier: '',
-                            file: "ui-content-app-1.0.zip",
+                            file: "${appName}.${BuildVersion}.zip",
                             type: "zip"
                             ]
                         ]
