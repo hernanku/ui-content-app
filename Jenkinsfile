@@ -73,12 +73,10 @@ pipeline {
                             classifier: '',
                             file: ui-content-app.zip,
                             type: "zip"
-                                    ]
-                                ]
-                            );
-                        } 
-                    }
-                }
+                            ]
+                        ]
+                    );
+                } 
             }
         }
 
