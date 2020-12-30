@@ -69,9 +69,9 @@ pipeline {
                     credentialsId: NEXUS_CREDENTIAL_ID,
                     artifacts: [
                         [
-                            artifactId: ui-content-app,
+                            artifactId: "ui-content-app",
                             classifier: '',
-                            file: ui-content-app.zip,
+                            file: "ui-content-app.zip",
                             type: "zip"
                             ]
                         ]
