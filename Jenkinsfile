@@ -1,17 +1,16 @@
 pipeline {
     agent {
-        docker { 
+        docker {
             image 'hernanku/jenkin-node-agent:latest'
         }
     }
     parameters {
-        string (defaultValue: "1.0", description: "Please enter release version number", name: "RELEASE")
+        string (defaultValue: '1.0', description: 'Please enter release version number', name: 'RELEASE')
     }
     environment {
         NEXUS_VERSION = "nexus3"
         NEXUS_PROTOCOL = "http"
-        NEXUS_URL = "http://10.177.23.30:8081"
-        NEXUS_REPOSITORY = "ui-content-app"
+        NEXUS_URL = "10.177.23.30:8081"
         NEXUS_CREDENTIAL_ID = "nexus-creds"
         BuildNumber = "${env.BUILD_NUMBER}"
         Release = "${params.RELEASE}"
@@ -26,7 +25,7 @@ pipeline {
                     url: "https://github.com/hernanku/${appName}.git"
                 // sh '''
 
-                // '''
+            // '''
             }
         }
         // stage('Code Quality Check with SonarQube') {
@@ -56,7 +55,7 @@ pipeline {
                 npm install
                 zip -r $appName.$BuildVersion.zip .
                 ls -altr
-                ''' 
+                '''
             }
         }
 
@@ -65,23 +64,23 @@ pipeline {
                 echo "${env.NEXUS_URL}"
                 echo "${env.NEXUS_REPOSITORY}"
                 echo "${env.NEXUS_CREDENTIAL_ID}"
-            script {
-                nexusArtifactUploader(
+                script {
+                    nexusArtifactUploader(
                     nexusVersion: NEXUS_VERSION,
                     protocol: NEXUS_PROTOCOL,
                     nexusUrl: NEXUS_URL,
-                    repository: NEXUS_REPOSITORY,
+                    repository: "${appName}",
                     credentialsId: NEXUS_CREDENTIAL_ID,
                     artifacts: [
                         [
                             artifactId: "${appName}",
                             classifier: '',
                             file: "${appName}.${BuildVersion}.zip",
-                            type: "zip"
+                            type: 'zip'
                             ]
                         ]
-                    );
-                } 
+                    )
+                }
             }
         }
 
@@ -93,11 +92,11 @@ pipeline {
         //     }
         // }
 
-        // stage ('Deploy to App Server') {
-        //     steps{
-        //         sh "sh pre-deploy.sh"
-        //     }
-        // }
+    // stage ('Deploy to App Server') {
+    //     steps{
+    //         sh "sh pre-deploy.sh"
+    //     }
+    // }
     }
     post {
         always {
