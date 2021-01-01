@@ -10,7 +10,7 @@ pipeline {
     environment {
         NEXUS_VERSION = "nexus3"
         NEXUS_PROTOCOL = "http"
-        NEXUS_URL = "10.177.23.30:8081"
+        NEXUS_URL = "192.168.1.127:8081"
         NEXUS_CREDENTIAL_ID = "nexus-creds"
         BuildNumber = "${env.BUILD_NUMBER}"
         Release = "${params.RELEASE}"
@@ -66,17 +66,17 @@ pipeline {
                 echo "${env.NEXUS_CREDENTIAL_ID}"
                 script {
                     nexusArtifactUploader(
-                    nexusVersion: NEXUS_VERSION,
-                    protocol: NEXUS_PROTOCOL,
-                    nexusUrl: NEXUS_URL,
-                    repository: "${appName}",
-                    credentialsId: NEXUS_CREDENTIAL_ID,
-                    artifacts: [
-                        [
-                            artifactId: "${appName}",
-                            classifier: '',
-                            file: "${appName}.${BuildVersion}.zip",
-                            type: 'zip'
+                        nexusVersion: NEXUS_VERSION,
+                        protocol: NEXUS_PROTOCOL,
+                        nexusUrl: NEXUS_URL,
+                        repository: "${appName}",
+                        credentialsId: NEXUS_CREDENTIAL_ID,
+                        artifacts: [
+                            [
+                                artifactId: "${appName}",
+                                classifier: '',
+                                file: "${appName}.${BuildVersion}.zip",
+                                type: 'zip'
                             ]
                         ]
                     )
