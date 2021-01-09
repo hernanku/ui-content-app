@@ -8,7 +8,7 @@ The node.js example app teaches the very basics of how to work with Contentful:
 - model content
 - edit content through the Contentful web app
 
-The app demonstrates how decoupling content from its presentation enables greater flexibility and facilitates shipping higher quality software more quickly.
+- App demonstrates how decoupling content from its presentation enables greater flexibility and facilitates shipping higher quality software more quickly.
 
 <a href="https://the-example-app-nodejs.herokuapp.com/" target="_blank"><img src="https://images.contentful.com/qz0n5cdakyl9/4GZmvrdodGM6CksMCkkAEq/700a527b8203d4d3ccd3c303c5b3e2aa/the-example-app.png" alt="Screenshot of the example app"/></a>
 
